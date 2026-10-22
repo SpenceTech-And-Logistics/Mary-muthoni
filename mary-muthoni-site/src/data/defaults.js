@@ -22,6 +22,7 @@ export const DEFAULT_SETTINGS = {
   intro:
     "Leading Kenya’s public health and professional standards agenda, from Community Health Promoters at the household door to health cooperation across Africa.",
   heroImage: "",
+  galleryIncludeLinked: true,
   introVideo: { title: "", url: "", caption: "" },
   stats: [
     { value: "2", label: "State Departments led as Principal Secretary" },
@@ -102,6 +103,7 @@ export const SAMPLE_PROJECTS = [
       { value: "24,500", label: "People screened for diabetes in Nandi" },
     ],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -121,6 +123,7 @@ export const SAMPLE_PROJECTS = [
       { value: "300+", label: "Children in prisons whose mothers’ cases she asked to review" },
     ],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -136,6 +139,7 @@ export const SAMPLE_PROJECTS = [
     body: "She was elected Chairperson of the African Permanent and Principal Secretaries for Health at a high-level consultative meeting on cross-border collaboration for health security held in Brazzaville in May 2026.\n\nThe forum brings together the chief administrative and accounting officers of health ministries across the continent. Under her chairmanship it promotes the sharing of best practice on Universal Health Coverage, health financing, disease surveillance and health systems strengthening.\n\nShe has said the role elevates Kenya’s place in shaping continental health priorities and gives the country access to shared expertise and best practice.",
     outcomes: [],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -151,6 +155,7 @@ export const SAMPLE_PROJECTS = [
     body: "In July 2026 she launched the Women in Healthcare Kenya Caucus in Nairobi, co-hosting the launch dinner with Dr Jacqueline Kitulu, President of the World Medical Association, under the theme “Connect. Share. Grow.”\n\nShe urged women across the health workforce, from Community Health Promoters to nurses and doctors, to apply for government-funded advanced training, noting that most applications for these scholarships were coming from men.",
     outcomes: [],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -166,6 +171,7 @@ export const SAMPLE_PROJECTS = [
     body: "She coordinated private sector participation at the WTO Tenth Ministerial Conference in Nairobi, the first WTO Ministerial Conference hosted in Africa.\n\nThe Conference adopted the “Nairobi Package”, a set of six Ministerial Decisions on agriculture, cotton and issues relating to Least Developed Countries.",
     outcomes: [{ value: "6", label: "Ministerial Decisions in the Nairobi Package" }],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -181,6 +187,7 @@ export const SAMPLE_PROJECTS = [
     body: "She coordinated private sector participation at the Fourteenth United Nations Conference on Trade and Development (UNCTAD 14), held in Nairobi from 17 to 22 July 2016 under the theme “From Decision to Action”.\n\nLater that year she coordinated private sector engagement at the Second High-Level Meeting of the Global Partnership for Effective Development Co-operation (HLM2), Nairobi, 28 November to 1 December 2016, under the theme “Towards Inclusive and Accelerated Implementation of the 2030 Agenda”.",
     outcomes: [],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -196,6 +203,7 @@ export const SAMPLE_PROJECTS = [
     body: "As President and Chief Executive Officer she leads a national network promoting, coordinating and engaging women in commerce and industry.\n\nThe Network works through five pillars: mentorship and capacity building; financial inclusion; market linkages and partnerships; networking, events and awards; and policy and advocacy. She founded the Women in Business Magazine and Awards to recognise women’s leadership in enterprise.",
     outcomes: [{ value: "5", label: "Programme pillars" }],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -211,6 +219,7 @@ export const SAMPLE_PROJECTS = [
     body: "She championed Access to Government Procurement Opportunities (AGPO) and women’s empowerment in public service delivery.\n\nThe work earned her the Devolution Warrior Award from the Council of Governors in March 2017, in the Gender Responsive Delivery category.",
     outcomes: [],
     image: "",
+    photos: [],
     videoUrl: "",
   },
   {
@@ -226,6 +235,7 @@ export const SAMPLE_PROJECTS = [
     body: "She mobilised businesswomen to distribute sanitisers to low-income markets and to matatu and boda boda operators, so that these high-contact groups would not become active spreaders of COVID-19.\n\nThe effort was recognised by H.E. the President with the Uzalendo Award.",
     outcomes: [],
     image: "",
+    photos: [],
     videoUrl: "",
   },
 ].map((p, i) => ({ ...p, id: `p-${p.slug}`, order: i }));

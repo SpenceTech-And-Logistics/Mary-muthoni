@@ -43,7 +43,7 @@ export function CtaBand({ title = "Media, partnership or speaking enquiries are 
 export function ProjectCard({ project: p, index = 0 }) {
   return (
     <Link to={`/projects/${p.slug}`} className="project-card">
-      <Photo src={p.image} label="" tone={index + 1} className="ratio-16-10">
+      <Photo src={p.cover} label="" tone={index + 1} className="ratio-16-10">
         {p.videoUrl && <span className="play-badge"><Play size={16} fill="var(--ink)" /></span>}
       </Photo>
       <div className="project-card-body">

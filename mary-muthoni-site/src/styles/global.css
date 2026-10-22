@@ -444,3 +444,14 @@ button { font: inherit; color: inherit; }
 .not-found { padding-bottom: 120px; }
 .admin-loading { padding: 48px; text-align: center; }
 .video:not(.video-cover) { background: #000; }
+
+/* Linked gallery items and project photo sets */
+.lb-text { display: flex; flex-direction: column; gap: 6px; color: var(--sand) !important; white-space: normal !important; }
+.lb-source { color: var(--amber); font-weight: 700; text-decoration: none; font-size: 0.9rem; }
+.lb-source:hover { text-decoration: underline; }
+.project-photos { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.project-photos .tile .photo { aspect-ratio: 4 / 3; }
+.project-photos .tile-cap { font-weight: 500; color: var(--muted); }
+.count-inline { font-family: var(--text); font-size: 1rem; vertical-align: middle; margin-left: 6px; }
+.project-photos, .video-grid { align-items: start; }
+.project-photos .photo img { position: absolute; inset: 0; }

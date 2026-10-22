@@ -151,6 +151,14 @@ function Editor({ initial }) {
       </div>
 
       <div className="admin-panel">
+        <h2>Gallery</h2>
+        <label className="admin-check">
+          <input type="checkbox" checked={s.galleryIncludeLinked !== false} onChange={(e) => set("galleryIncludeLinked", e.target.checked)} />
+          <span>Also show photos and videos from projects, news stories and awards in the Gallery, each linking back to its page</span>
+        </label>
+      </div>
+
+      <div className="admin-panel">
         <h2>Colours</h2>
         <p className="admin-small">The main colour should stay dark so light text on it stays readable.</p>
         <div className="admin-grid">

@@ -4,6 +4,11 @@ import { removeItem, saveItem, saveOrder, seedSamples } from "../../lib/store";
 import { compressImage } from "../../lib/image";
 import { slugify } from "../../lib/format";
 import ImageField from "./ImageField";
+import PhotosField from "./PhotosField";
+
+// Firestore keeps each record under 1 MB; stay a little below that.
+const MAX_BYTES = 950 * 1024;
+const sizeOf = (item) => new Blob([JSON.stringify(item)]).size;
 
 /*
   A generic add / edit / delete / reorder screen, used for projects, positions,
@@ -66,7 +71,7 @@ function Crud({ name, title, intro, fields, describe, sortable = false, samples 
   const [error, setError] = useState("");
   const [progress, setProgress] = useState("");
 
-  const blank = () => Object.fromEntries(fields.map((f) => [f.key, f.default ?? (["lines", "pairs", "refs"].includes(f.type) ? [] : f.type === "checkbox" ? false : "")]));
+  const blank = () => Object.fromEntries(fields.map((f) => [f.key, f.default ?? (["lines", "pairs", "refs", "photos"].includes(f.type) ? [] : f.type === "checkbox" ? false : "")]));
 
   async function onSave(e) {
     e.preventDefault();
@@ -80,6 +85,12 @@ function Crud({ name, title, intro, fields, describe, sortable = false, samples 
         const taken = new Set(items.filter((i) => i.id !== item.id).map((i) => i.slug));
         for (let n = 2; taken.has(slug); n++) slug = `${slugify(item.slug || item[slugFrom])}-${n}`;
         item.slug = slug;
+      }
+      const bytes = sizeOf(item);
+      if (bytes > MAX_BYTES) {
+        setError(`This ${singular} is too large to save (${Math.round(bytes / 1024)} KB of ${Math.round(MAX_BYTES / 1024)} KB). Remove a few uploaded photos, or add them by pasting image links instead, which take almost no space.`);
+        setBusy(false);
+        return;
       }
       if (!item.id && sortable) {
         const lowest = Math.min(0, ...items.map((i) => i.order ?? 0));
@@ -193,6 +204,9 @@ function Crud({ name, title, intro, fields, describe, sortable = false, samples 
           <div className="admin-grid">
             {fields.map((f) => {
               if (f.showIf && !f.showIf(editing)) return null;
+              if (f.type === "photos") {
+                return <PhotosField key={f.key} label={f.label} hint={f.hint} value={editing[f.key]} onChange={(v) => set(f.key, v)} maxSide={f.maxSide} />;
+              }
               if (f.type === "image") {
                 return <ImageField key={f.key} label={f.label} value={editing[f.key]} onChange={(v) => set(f.key, v)} maxSide={f.maxSide} />;
               }
@@ -213,8 +227,10 @@ function Crud({ name, title, intro, fields, describe, sortable = false, samples 
               );
             })}
           </div>
+          {error && <p className="admin-error" role="alert">{error}</p>}
           <div className="admin-actions">
             <button className="admin-btn primary" type="submit" disabled={busy}>{busy ? "Saving..." : "Save"}</button>
+            <span className={`admin-small ${sizeOf(editing) > MAX_BYTES ? "admin-error" : ""}`}>Space used: {Math.round(sizeOf(editing) / 1024)} KB of {Math.round(MAX_BYTES / 1024)} KB</span>
             <button className="admin-btn" type="button" onClick={() => setEditing(null)}>Cancel</button>
           </div>
         </form>

@@ -52,7 +52,7 @@ function Projects() {
         <section>
           <div className="container pt-md">
             <Link to={`/projects/${feature.slug}`} className="feature-card">
-              <Photo src={feature.image} label="" tone={0} className="feature-photo"><span className="chip-amber abs-tl">FEATURED</span></Photo>
+              <Photo src={feature.cover} label="" tone={0} className="feature-photo"><span className="chip-amber abs-tl">FEATURED</span></Photo>
               <div className="feature-body">
                 <div className="kicker amber">{[feature.sector, feature.year, feature.place].filter(Boolean).join(" · ").toUpperCase()}</div>
                 <h2>{feature.title}</h2>

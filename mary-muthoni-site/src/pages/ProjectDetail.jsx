@@ -1,4 +1,6 @@
+import { useCallback, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Lightbox from "../components/Lightbox";
 import Seo from "../components/Seo";
 import Photo from "../components/Photo";
 import VideoPlayer from "../components/VideoPlayer";
@@ -10,7 +12,12 @@ import NotFound from "./NotFound";
 function ProjectDetail() {
   const { slug } = useParams();
   const { projects, news, ready } = useContent();
+  const [open, setOpen] = useState(-1);
   const p = projects.find((x) => x.slug === slug);
+  const set = p ? [p.image && { src: p.image, caption: "" }, ...(p.photos || [])].filter((x) => x?.src) : [];
+  const shots = set.map((ph, k) => ({ id: `ph-${k}`, kind: "photo", image: ph.src, caption: ph.caption || p.title }));
+  const count = shots.length;
+  const move = useCallback((d) => setOpen((i) => (i + d + count) % count), [count]);
   if (!p) return ready ? <NotFound /> : <p className="container section-top">Loading...</p>;
 
   const stories = news.filter((n) => (n.relatedProjects || []).includes(p.slug));
@@ -19,7 +26,7 @@ function ProjectDetail() {
 
   return (
     <>
-      <Seo title={p.title} path={`/projects/${p.slug}`} description={p.summary} image={p.image} />
+      <Seo title={p.title} path={`/projects/${p.slug}`} description={p.summary} image={p.cover} />
       <section className="page-head">
         <div className="container">
           <Link to="/projects" className="back-link">&larr; All projects</Link>
@@ -31,7 +38,11 @@ function ProjectDetail() {
 
       <section>
         <div className="container pt-md">
-          <Photo src={p.image} label="PROJECT PHOTO" tone={1} className="detail-hero" alt={p.title} />
+          {shots.length ? (
+            <button type="button" className="tile" onClick={() => setOpen(0)} aria-label="Open the project photos">
+              <Photo src={p.cover} label="" tone={1} className="detail-hero" alt={p.title} />
+            </button>
+          ) : <Photo src="" label="PROJECT PHOTO" tone={1} className="detail-hero" alt={p.title} />}
         </div>
       </section>
 
@@ -58,12 +69,30 @@ function ProjectDetail() {
         </section>
       )}
 
+      {shots.length > 1 && (
+        <section>
+          <div className="container section-top">
+            <h2 className="h-mid">Photos <span className="muted count-inline">{shots.length}</span></h2>
+            <div className="project-photos">
+              {shots.map((s, k) => (
+                <button type="button" className="tile" key={s.id} onClick={() => setOpen(k)} aria-label={`Open photo ${k + 1}: ${s.caption}`}>
+                  <Photo src={s.image} label="" tone={k} alt={s.caption} />
+                  {s.caption !== p.title && <span className="tile-cap">{s.caption}</span>}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {open >= 0 && shots[open] && <Lightbox items={shots} index={open} onClose={() => setOpen(-1)} onMove={move} hideSource />}
+
       {p.videoUrl && (
         <section>
           <div className="container section-top narrow-col">
             <div className="eyebrow">WATCH</div>
             <h2 className="h-mid mb">On the ground</h2>
-            <VideoPlayer url={p.videoUrl} poster={p.image} title={p.title} />
+            <VideoPlayer url={p.videoUrl} poster={p.cover} title={p.title} />
           </div>
         </section>
       )}

@@ -9,7 +9,7 @@ import { useContent } from "../lib/contentContext";
 import { parseVideo } from "../lib/video";
 
 function Gallery() {
-  const { displayName, gallery } = useContent();
+  const { displayName, media: gallery } = useContent();
   const [params, setParams] = useSearchParams();
   const tab = params.get("tab") === "videos" ? "videos" : "photos";
   const [album, setAlbum] = useState("All");

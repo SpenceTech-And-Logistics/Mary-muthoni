@@ -38,7 +38,7 @@ function ProjectCarousel({ projects }) {
         </div>
 
         <div className="slide" key={p.id}>
-          <Photo src={p.image} label="PROJECT PHOTO" tone={i} className="slide-photo" alt={p.title} />
+          <Photo src={p.cover} label="PROJECT PHOTO" tone={i} className="slide-photo" alt={p.title} />
           <div className="slide-body">
             <div>
               <div className="slide-meta"><span className="chip-amber">{(p.sector || "").toUpperCase()}</span><span>{[p.year, p.place].filter(Boolean).join(" · ").toUpperCase()}</span></div>
@@ -62,7 +62,7 @@ function ProjectCarousel({ projects }) {
           {projects.map((q, k) => (
             <button type="button" key={q.id} onClick={() => go(k)} className={k === i ? "is-active" : ""} aria-label={`Show project ${k + 1}: ${q.title}`} aria-current={k === i}>
               <span className="bar" />
-              <Photo src={q.image} label="" tone={k} className="ratio-16-9" />
+              <Photo src={q.cover} label="" tone={k} className="ratio-16-9" />
               <span className="film-title">{q.title}</span>
             </button>
           ))}
@@ -73,7 +73,7 @@ function ProjectCarousel({ projects }) {
 }
 
 function Home() {
-  const { settings, fullName, projects, news, events, awards, gallery } = useContent();
+  const { settings, fullName, projects, news, events, awards, media: gallery } = useContent();
   const featured = projects.filter((p) => p.featured);
   const carousel = (featured.length ? featured : projects).slice(0, 6);
   const upcoming = events.filter(isUpcoming).slice(0, 3);

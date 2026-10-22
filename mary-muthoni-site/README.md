@@ -24,12 +24,13 @@ Without Firebase the site shows the built-in content from `src/data/defaults.js`
 6. Open `/admin`, sign in. In each section press **Load the starting content** once to copy the built-in projects, positions, awards, news, events and gallery into the database. Then open **Profile and settings** and press **Save all changes** once.
 
 ## 2. What the dashboard edits
-- **Projects**: photo, video link, sector, status, year, place, budget, outcomes (`number | label` per line), full text. Tick "Show in the home page carousel".
+- **Projects**: main photo plus **More photos** (upload several at once or paste image links, each with a caption, reorder with arrows), video link, sector, status, year, place, budget, outcomes (`number | label` per line), full text. Tick "Show in the home page carousel". The form shows how much of the 950 KB record limit is used; pasted links take almost no space.
 - **Positions**: grouped (Public office, Boards and committees, Institutional leadership, Earlier career); "current" ones show on top.
 - **Awards**: ordered list; the first with a citation is shown large.
 - **News**: photo or video, link to the original, related projects, earlier stories and outside links.
 - **Events**: upcoming ones get Google Calendar and .ics buttons, and move to Past by themselves.
-- **Gallery**: bulk photo upload; videos by pasting a YouTube, Vimeo, Facebook or .mp4 link.
+- **Gallery**: bulk photo upload; videos by pasting a YouTube, Vimeo, Facebook or .mp4 link. Photos and videos attached to projects, news and awards also appear in the public Gallery automatically (albums "Projects", "News", "Awards"), each with a link back to its page. Switch this off in Profile and settings > Gallery.
+- Every photo field also accepts a pasted image link (https://...) instead of an upload.
 - **Profile and settings**: name, office, portrait, intro video, headline numbers, biography, education, expertise, memberships, quote, contact, social links, colours.
 - **Messages**: contact form submissions.
 

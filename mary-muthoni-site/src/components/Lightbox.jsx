@@ -1,8 +1,9 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Photo from "./Photo";
 import VideoPlayer from "./VideoPlayer";
 
-function Lightbox({ items, index, onClose, onMove }) {
+function Lightbox({ items, index, onClose, onMove, hideSource = false }) {
   const item = items[index];
   useEffect(() => {
     const onKey = (e) => {
@@ -24,7 +25,13 @@ function Lightbox({ items, index, onClose, onMove }) {
         {item.kind === "video"
           ? <VideoPlayer key={item.id} url={item.videoUrl} poster={item.image} title={item.caption} />
           : <Photo src={item.image} label="PHOTO" alt={item.caption} tone={index} className="lightbox-photo" />}
-        <figcaption>{item.caption} <span>{index + 1} / {items.length}</span></figcaption>
+        <figcaption>
+          <span className="lb-text">
+            {item.caption}
+            {item.source && !hideSource && <Link to={item.source.to} className="lb-source" onClick={onClose}>{item.source.type === "page" ? "Open" : `Open the ${item.source.type}`}: {item.source.label} &rarr;</Link>}
+          </span>
+          <span>{index + 1} / {items.length}</span>
+        </figcaption>
       </figure>
       <button type="button" className="lightbox-btn close" onClick={onClose} aria-label="Close">&times;</button>
       {items.length > 1 && (

@@ -95,3 +95,24 @@
 .admin-brand { font-weight: 600; }
 .admin-root h1, .admin-root h2, .admin-root h3 { font-family: var(--display); font-weight: 600; }
 @media (min-width: 700px) { .admin-cards { grid-template-columns: repeat(3, 1fr); } }
+
+.link-adder { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.admin-root .link-adder input { flex: 1 1 240px; width: auto; padding: 9px 12px; font-size: 0.9rem; }
+.photo-set { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.photo-set li { background: #fff; border: 1.5px solid var(--a-line); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.photo-set img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: var(--a-bg); }
+.admin-root .photo-set input { padding: 8px 10px; font-size: 0.88rem; }
+.photo-set-actions { display: flex; gap: 6px; }
+.photo-set-actions .admin-btn { padding: 6px 10px; font-size: 0.82rem; }
+.photo-set-actions .danger { margin-left: auto; }
+
+.link-adder { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.admin-root .link-adder input { flex: 1 1 240px; width: auto; padding: 9px 12px; font-size: 0.9rem; }
+.photo-set { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.photo-set li { background: #fff; border: 1.5px solid var(--a-line); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.photo-set img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: var(--a-bg); }
+.admin-root .photo-set input { padding: 8px 10px; font-size: 0.88rem; }
+.photo-set-actions { display: flex; gap: 6px; }
+.photo-set-actions .admin-btn { padding: 6px 10px; font-size: 0.82rem; }
+.photo-set-actions .danger { margin-left: auto; }
+.admin-root .admin-check { align-self: auto; padding-bottom: 0; font-weight: 500; }

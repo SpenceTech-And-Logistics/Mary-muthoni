@@ -27,7 +27,8 @@ const projectFields = [
   { key: "outcomes", label: "Outcomes", type: "pairs", keys: ["value", "label"], wide: true, placeholder: "12,000 | households reached\n85% | of facilities linked", hint: "One per line: number | what it measures. The first three show on the carousel." },
   { key: "videoUrl", label: "Video (optional)", type: "url", max: 400, wide: true, hint: VIDEO_HINT },
   { key: "slug", label: "Web address (optional)", max: 70, hint: "Made from the name if left empty, e.g. /projects/one-bed-one-mattress. Changing it breaks old links." },
-  { key: "image", label: "Main photo", type: "image", maxSide: 1600 },
+  { key: "image", label: "Main photo (cover)", type: "image", maxSide: 1400 },
+  { key: "photos", label: "More photos", type: "photos", maxSide: 1200, hint: "Shown as a photo set on the project page and added to the public Gallery. Uploads use space (about 6 to 8 photos fit per project); pasted links use almost none." },
 ];
 
 const positionFields = [
@@ -88,7 +89,7 @@ const galleryFields = [
 const SECTIONS = [
   { path: "projects", label: "Projects", name: "projects", singular: "project", fields: projectFields, sortable: true, samples: SAMPLE_PROJECTS, slugFrom: "title",
     intro: "Use the arrows to set the order. Tick “Show in the home page carousel” for the projects to feature.",
-    describe: (p) => ({ title: `${p.featured ? "★ " : ""}${p.title}`, sub: [p.sector, p.status, p.year].filter(Boolean).join(" · "), image: p.image }) },
+    describe: (p) => ({ title: `${p.featured ? "★ " : ""}${p.title}`, sub: [p.sector, p.status, p.year, p.photos?.length && `${p.photos.length} more photo${p.photos.length === 1 ? "" : "s"}`].filter(Boolean).join(" · "), image: p.cover }) },
   { path: "positions", label: "Positions", name: "positions", singular: "position", fields: positionFields, sortable: true, samples: SAMPLE_POSITIONS,
     intro: "Newest first within each group. Positions marked current appear at the top of the page.",
     describe: (p) => ({ title: `${p.title}, ${p.org}`, sub: [p.kind, p.years, p.current && "Current"].filter(Boolean).join(" · ") }) },
@@ -103,7 +104,7 @@ const SECTIONS = [
     describe: (e) => ({ title: e.title, sub: [formatDate(e.date), e.type, e.town].filter(Boolean).join(" · ") }) },
   { path: "gallery", label: "Gallery", name: "gallery", singular: "photo or video", fields: galleryFields, sortable: true, samples: SAMPLE_GALLERY,
     bulk: { maxSide: 1600, defaults: { kind: "photo", caption: "", album: ALBUMS[0], videoUrl: "" } },
-    intro: "Photos and videos. The first five photos show on the home page; the first videos appear under “Hear it first-hand”.",
+    intro: "Photos and videos added here. Photos and videos attached to projects, news stories and awards also appear in the public Gallery automatically (this can be switched off in Profile and settings)",
     describe: (g) => ({ title: g.caption || "No caption yet", sub: [g.kind === "video" ? "Video" : "Photo", g.album].filter(Boolean).join(" · "), image: g.image }) },
 ];
 
